@@ -1,8 +1,19 @@
 import streamlit as st
 
-password = st.text_input("Enter password", type="password")
+# --- AUTH ---
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
 
-if password != st.secrets["APP_PASSWORD"]:
+if not st.session_state.authenticated:
+    st.title("Invoice Reconciliation Tool")
+    password = st.text_input("Enter password", type="password")
+
+    if password == st.secrets["APP_PASSWORD"]:
+        st.session_state.authenticated = True
+        st.rerun()
+    elif password:
+        st.error("Incorrect password")
+
     st.stop()
     
 import streamlit.components.v1 as components
@@ -11,7 +22,7 @@ import tempfile
 from pathlib import Path
 
 import pandas as pd
-import streamlit as st
+
 
 from reconcile import (
     load_all_invoices_for_batch,
