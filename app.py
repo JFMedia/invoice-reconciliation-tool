@@ -1,3 +1,10 @@
+import streamlit as st
+
+password = st.text_input("Enter password", type="password")
+
+if password != st.secrets["APP_PASSWORD"]:
+    st.stop()
+    
 import streamlit.components.v1 as components
 import os
 import tempfile
