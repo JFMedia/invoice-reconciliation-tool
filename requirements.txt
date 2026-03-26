@@ -1,3 +1,6 @@
 streamlit
 openai
 pandas
+pdfplumber
+rapidfuzz
+openpyxl
